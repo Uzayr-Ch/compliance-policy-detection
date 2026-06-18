@@ -11,10 +11,13 @@ from src.reports.store import append_event, init_db
 from src.severity.matrix import categorize
 
 
-def run_pipeline(demo: bool = False, data_dir: Path | None = None) -> list[ComplianceEvent]:
+def run_pipeline(
+    demo: bool = False, data_dir: Path | None = None, persist: bool = True
+) -> list[ComplianceEvent]:
     rules = write_rules_json()
     detections = detect_violations(rules, data_dir=data_dir or Path("data"), demo=demo)
-    init_db()
+    if persist:
+        init_db()
     events: list[ComplianceEvent] = []
     for detection in detections:
         severity = categorize(detection, rules)
@@ -31,7 +34,8 @@ def run_pipeline(demo: bool = False, data_dir: Path | None = None) -> list[Compl
             confidence=detection.confidence,
             source_video=detection.source_video,
         )
-        append_event(event)
+        if persist:
+            append_event(event)
         events.append(event)
     return events
 

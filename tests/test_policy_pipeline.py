@@ -16,7 +16,7 @@ def test_policy_parser_extracts_four_unsafe_rules():
 
 
 def test_demo_pipeline_generates_required_event_fields():
-    events = run_pipeline(demo=True)
+    events = run_pipeline(demo=True, persist=False)
     assert len(events) == 4
     first = events[0].to_dict()
     for field in [
