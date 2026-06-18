@@ -93,6 +93,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+> [!IMPORTANT]
+> **System Dependency:** [FFmpeg](https://ffmpeg.org/) must be installed on your host system and added to your system `PATH` env variable to enable browser-compatible video transcoding.
+
 ### 2. Run the Pipeline
 
 ```bash
@@ -151,6 +154,14 @@ This ensures the parser adapts automatically if the policy document structure ch
 | Carrying Overload with Forklift | Counts detected boxes on forklifts; red label `Forklift Overloaded` when ≥ 3 |
 
 The engine gracefully falls back to manifest-based or demo detection when vision libraries are unavailable.
+
+### Browser-Compatible H.264 Video Transcoding
+
+OpenCV's default `mp4v` codec is not supported for native web rendering in modern browsers (Chrome/Edge/Firefox). To solve this:
+- The Streamlit dashboard integrates an **automatic H.264 transcoder** using **FFmpeg** (`libx264` video codec, `yuv420p` pixel format).
+- When a video is selected, the system checks if a web-compatible version (`web_*.mp4`) exists. If not, it transcodes the file in the background.
+- It bypasses OS buffer limits by outputting directly to `subprocess.DEVNULL`, preventing execution deadlocks.
+- Once optimized, it serves the video as a binary stream to circumvent local file protocol and CORS restrictions, ensuring instant, stutter-free playback.
 
 ### Three-Layer Severity Classification
 
