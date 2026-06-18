@@ -21,23 +21,23 @@
 ┌─────────────────────────────────────────────────────────────────┐
 │                    COMPLIANCE PIPELINE                          │
 │                                                                 │
-│  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐    │
-│  │  Policy   │   │Detection │   │ Severity │   │Escalation│    │
-│  │  Parser   │──▶│  Engine  │──▶│  Matrix  │──▶│  Router  │    │
-│  │ (pypdf)   │   │(YOLOv8)  │   │(3-layer) │   │(dispatch)│    │
-│  └──────────┘   └──────────┘   └──────────┘   └──────────┘    │
+│  ┌──────────┐    ┌──────────┐   ┌──────────┐    ┌──────────┐    │
+│  │  Policy  │    │Detection │   │ Severity │    │Escalation│    │
+│  │  Parser  │──▶│  Engine  │──▶│  Matrix  │──▶│  Router  │    │
+│  │ (pypdf   │    │(YOLOv8)  │   │(3-layer) │    │(dispatch)│    │
+│  └──────────┘    └──────────┘   └──────────┘    └──────────┘    │
 │       │                                              │          │
 │       ▼                                              ▼          │
 │  policy_rules.json                          ComplianceEvent     │
 │                                             + SHA-256 sig       │
 │                                                    │            │
-│                                    ┌───────────────┼──────┐     │
-│                                    ▼               ▼      ▼     │
-│                               SQLite DB       JSONL     CSV     │
+│                                       ┌────────────┼──────┐     │
+│                                       ▼            ▼      ▼     │
+│                                  SQLite DB    JSONL     CSV     │
 │                                                                 │
 │  ┌──────────────────────────────────────────────────────────┐   │
-│  │              STREAMLIT OPERATIONS DASHBOARD               │   │
-│  │  Live Monitor │ Analytics │ Timeline │ Audit │ History    │   │
+│  │              STREAMLIT OPERATIONS DASHBOARD              │   │
+│  │  Live Monitor │ Analytics │ Timeline │ Audit │ History   │   │
 │  └──────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
 ```
