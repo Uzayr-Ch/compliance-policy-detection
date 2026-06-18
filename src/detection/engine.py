@@ -374,12 +374,12 @@ def detect_violations(
     rules: list[BehaviorRule], data_dir: Path = DATA_DIR, demo: bool = False
 ) -> list[DetectionRecord]:
     data_dir.mkdir(parents=True, exist_ok=True)
+    if demo:
+        return _demo_records(rules)
     manifest_records = _from_manifest(data_dir, rules)
     if manifest_records:
         return manifest_records
     video_records = _from_video_names(data_dir, rules)
     if video_records:
         return video_records
-    if demo:
-        return _demo_records(rules)
     return []

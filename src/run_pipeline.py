@@ -9,8 +9,15 @@ to the triple-format audit trail (SQLite + JSONL + CSV).
 """
 from __future__ import annotations
 
-import argparse
+import sys
 from pathlib import Path
+
+# Ensure project root is in python path to handle direct script execution
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+import argparse
 
 from src.detection.engine import detect_violations
 from src.escalation.router import route_for_severity

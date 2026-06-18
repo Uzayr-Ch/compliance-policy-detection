@@ -11,7 +11,14 @@ Features:
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
+
+# Ensure project root is in python path to handle direct script execution
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 import pandas as pd
 import streamlit as st
@@ -297,6 +304,33 @@ if not df.empty:
             width=0,
         )
 
+def get_web_compatible_video(video_path: Path) -> Path:
+    """
+    Ensure the video is in a web-compatible format (H.264).
+    If not already transcoded, transcode it using ffmpeg.
+    """
+    if video_path.name.startswith("web_"):
+        return video_path
+        
+    web_path = video_path.parent / f"web_{video_path.name}"
+    if web_path.exists():
+        return web_path
+        
+    try:
+        cmd = [
+            "ffmpeg", "-y",
+            "-i", str(video_path),
+            "-vcodec", "libx264",
+            "-pix_fmt", "yuv420p",
+            "-profile:v", "baseline",
+            "-level", "3.0",
+            str(web_path)
+        ]
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        return web_path
+    except Exception:
+        return video_path
+
 # ── Tab layout ───────────────────────────────────────────────────────────────
 tab_live, tab_kpi, tab_timeline, tab_audit, tab_history = st.tabs([
     "📺 Live Monitor",
@@ -320,15 +354,32 @@ with tab_live:
             st.markdown('<div class="section-header">📹 Incident Video Feed</div>', unsafe_allow_html=True)
             annotated_dir = ROOT / "outputs" / "annotated"
             video_files = list(annotated_dir.glob("*.mp4")) if annotated_dir.exists() else []
+            raw_videos = [f for f in video_files if not f.name.startswith("web_")]
 
-            if video_files:
-                video_map = {f.name: f for f in video_files}
+            if raw_videos:
+                to_transcode = [f for f in raw_videos if not (f.parent / f"web_{f.name}").exists()]
+                if to_transcode:
+                    with st.spinner("Optimizing video codec for browser playback..."):
+                        web_videos = [get_web_compatible_video(f) for f in raw_videos]
+                else:
+                    web_videos = [f.parent / f"web_{f.name}" for f in raw_videos]
+                
+                video_map = {f.name.replace("web_", ""): f for f in web_videos}
                 sel = st.selectbox("Select annotated clip:", list(video_map.keys()))
-                st.video(str(video_map[sel]))
+                try:
+                    with open(video_map[sel], "rb") as vf:
+                        st.video(vf.read())
+                except Exception as ve:
+                    st.error(f"Failed to play video: {ve}")
             else:
                 source = latest.get("source_video")
                 if source and Path(source).exists():
-                    st.video(source)
+                    web_source = get_web_compatible_video(Path(source))
+                    try:
+                        with open(web_source, "rb") as vf:
+                            st.video(vf.read())
+                    except Exception as ve:
+                        st.error(f"Failed to play video: {ve}")
                 else:
                     st.info(
                         f"No video feed available.  \n"

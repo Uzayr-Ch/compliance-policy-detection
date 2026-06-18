@@ -1,0 +1,114 @@
+{
+  "source": "/kaggle/input",
+  "notes": "Auto-generated on Kaggle from dataset file/folder names. Review behavior_class values before using for final reporting.",
+  "events": [
+    {
+      "clip_id": "0_te1.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/0_safe_walkway_violation/0_te1.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Safe Walkway Violation",
+      "observed_behavior": "Person detected outside the green-marked designated safe walkway boundary.",
+      "zone": "Zone-1",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "0_te10.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/0_safe_walkway_violation/0_te10.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Safe Walkway Violation",
+      "observed_behavior": "Person detected outside the green-marked designated safe walkway boundary.",
+      "zone": "Zone-2",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "0_te11.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/0_safe_walkway_violation/0_te11.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Safe Walkway Violation",
+      "observed_behavior": "Person detected outside the green-marked designated safe walkway boundary.",
+      "zone": "Zone-3",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "1_te1.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/1_unauthorized_intervention/1_te1.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Unauthorized Intervention",
+      "observed_behavior": "Person appears to be interacting with production equipment without the green authorization vest indicator.",
+      "zone": "Zone-4",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "1_te10.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/1_unauthorized_intervention/1_te10.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Unauthorized Intervention",
+      "observed_behavior": "Person appears to be interacting with production equipment without the green authorization vest indicator.",
+      "zone": "Zone-5",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "1_te11.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/1_unauthorized_intervention/1_te11.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Unauthorized Intervention",
+      "observed_behavior": "Person appears to be interacting with production equipment without the green authorization vest indicator.",
+      "zone": "Zone-6",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "2_te1.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/2_opened_panel cover/2_te1.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Opened Panel Cover",
+      "observed_behavior": "Electrical panel cover appears open during production operations.",
+      "zone": "Zone-7",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "2_te10.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/2_opened_panel cover/2_te10.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Opened Panel Cover",
+      "observed_behavior": "Electrical panel cover appears open during production operations.",
+      "zone": "Zone-8",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "2_te11.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/2_opened_panel cover/2_te11.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Opened Panel Cover",
+      "observed_behavior": "Electrical panel cover appears open during production operations.",
+      "zone": "Zone-9",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "3_te1.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/3_carrying_overload_with_forklift/3_te1.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Carrying Overload with Forklift",
+      "observed_behavior": "Forklift load appears to exceed the safe threshold of two standardized blocks.",
+      "zone": "Zone-10",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "3_te2.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/3_carrying_overload_with_forklift/3_te2.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Carrying Overload with Forklift",
+      "observed_behavior": "Forklift load appears to exceed the safe threshold of two standardized blocks.",
+      "zone": "Zone-11",
+      "confidence": 0.75
+    },
+    {
+      "clip_id": "3_te3.mp4",
+      "video": "/kaggle/input/datasets/trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours/Video Dataset for Safe and Unsafe Behaviours/Safe and Unsafe Behaviours Dataset/test/3_carrying_overload_with_forklift/3_te3.mp4",
+      "timestamp_seconds": 1.0,
+      "behavior_class": "Carrying Overload with Forklift",
+      "observed_behavior": "Forklift load appears to exceed the safe threshold of two standardized blocks.",
+      "zone": "Zone-12",
+      "confidence": 0.75
+    }
+  ]
+}
