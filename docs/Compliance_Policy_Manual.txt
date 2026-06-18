@@ -1,0 +1,408 @@
+
+
+--- Page 1 ---
+
+KMP-OHS-POL-001  |  Occupational Health & Safety Compliance Policy Manual 
+CONTROLLED DOCUMENT — Internal Use Only  |  Kafaoglu Metal Plastik Makine San. ve Tic. A.S. Page 
+ 
+KAFAOGLU METAL PLASTIK MAKINE 
+SAN. VE TIC. A.S. 
+ 
+OCCUPATIONAL HEALTH & SAFETY 
+COMPLIANCE POLICY MANUAL 
+Factory Operations — Production Floor Regulations 
+ 
+ 
+Document No. KMP-OHS-POL-001 
+Effective Date 01 November 2022 
+Classification Internal — Mandatory Compliance 
+Issuing Authority EHS Department / Occupational Safety Expert 
+Applies To All production floor personnel, contractors, and 
+visitors 
+ 
+CONTROLLED DOCUMENT — DO NOT DUPLICATE WITHOUT AUTHORIZATION 
+  
+
+
+--- Page 2 ---
+
+KMP-OHS-POL-001  |  Occupational Health & Safety Compliance Policy Manual 
+CONTROLLED DOCUMENT — Internal Use Only  |  Kafaoglu Metal Plastik Makine San. ve Tic. A.S. Page 
+SECTION 1 — PURPOSE, SCOPE, AND BACKGROUND 
+1.1  Purpose 
+This Occupational Health and Safety Compliance Policy Manual (hereinafter "the Manual") establishes the 
+mandatory behavioral standards governing all activities conducted within the production facilities of 
+Kafaoglu Metal Plastik Makine San. ve Tic. A.S. (hereinafter "the Company"). The Manual defines which 
+observable behaviors on the production floor are classified as safe or unsafe, and describes the monitoring 
+and alert mechanisms in place to detect and respond to unsafe behaviors in real time.  
+ 
+Unsafe behaviors are a leading cause of occupational accidents. Globally, it is estimated that approximately 
+2.3 million occupational accidents and diseases occur each year, resulting in around 0.3 million deaths. The 
+economic costs of work-related injuries and illnesses are estimated at between 1.8% and 6.0% of GDP 
+across countries, with an average of 4% according to the International Labour Organization (ILO). The 
+Company is committed to minimizing the contribution of unsafe behavior to these figures with in its own 
+operations. 
+ 
+Despite regular safety inspections and ongoing preventive measures, accidents continue to occur as a 
+result of breaches of occupational health and safety protocols. Human error cannot be completely 
+eliminated through inspection alone. This Manual therefore sets out the behavioral standards and 
+automated monitoring measures that complement inspection activities. 
+ 
+1.2  Scope of Application 
+This Manual applies to all personnel operating on the production floor, including full -time and temporary 
+employees, subcontractors, maintenance personnel, and visitors. It defines four specific behavioral domains 
+— pedestrian movement, equipment intervention, electrical panel management, and forklift load 
+management — within which safe and unsafe behaviors have been identified in consultation with the 
+Company's occupational safety expert. 
+ 
+1.3  Monitoring and Enforcement 
+The Company has installed an automated real-time behavior detection and warning system on the 
+production floor. This system continuously monitors live video feeds from IP cameras installed throughout 
+the facility. When an unsafe behavior is detected, the system immediately issues both audible and visual 
+warnings in the area where the behavior is occurring, and automatically logs the event for reporting. The 
+provisions of this Manual define the behaviors that trigger these automated responses.  
+  
+
+
+--- Page 3 ---
+
+KMP-OHS-POL-001  |  Occupational Health & Safety Compliance Policy Manual 
+CONTROLLED DOCUMENT — Internal Use Only  |  Kafaoglu Metal Plastik Makine San. ve Tic. A.S. Page 
+SECTION 2 — DEFINITIONS AND CLASSIFICATION OF BEHAVIORS 
+2.1  Behavioral Classification Framework 
+All observable behaviors on the production floor are classified into two categories: Safe Behaviors and 
+Unsafe Behaviors. For each of the four operational domains covered by this Manual, a specific safe 
+behavior and a specific unsafe behavior have been defined. These definitions form the basis for the 
+automated monitoring system's detection logic and for the alert and reporting procedures described in 
+Section 7. 
+ 
+2.2  Glossary of Terms 
+ 
+Term Definition 
+Safe Behavior An observable action that conforms to the operational standards defined in 
+this Manual for the relevant behavioral domain. Safe behaviors are the 
+expected norm and do not trigger monitoring alerts. 
+Unsafe Behavior An observable action that deviates from the operational standards defined in 
+this Manual and creates a risk of injury or operational harm. Unsafe 
+behaviors trigger the automated alert and reporting system described in 
+Section 7. 
+Designated Safe Walkway The pedestrian pathway within the production floor that is delineated by 
+green painted floor markings. Personnel on foot are required to remain within 
+these green-marked boundaries at all times during production operations. 
+Safe Walkway Violation The unsafe behavior of moving outside the boundaries of the Designated 
+Safe Walkway. Defined as the opposite of the Safe Walkway behavior. 
+Authorized Intervention The safe behavior of interacting with or working on production equipment 
+while wearing the designated green safety vest, indicating that the individual 
+has been cleared to perform that activity. The green vest is the observable 
+indicator of authorization. 
+Unauthorized Intervention The unsafe behavior of interacting with or working on production equipment 
+while not wearing the designated green safety vest, or while not wearing the 
+required safety equipment. Defined as the opposite of Authorized 
+Intervention. This includes situations where personnel intervene in situations 
+at work sites without authorization and without appropriate safety equipment. 
+Closed Panel Cover The safe condition in which the protective cover of an electrical panel 
+connected to a machine is fully closed. This is the required state during 
+normal production operations. 
+Opened Panel Cover The unsafe condition of leaving or forgetting a panel cover in the open 
+position. Defined as the opposite of the Closed Panel Cover condition. 
+Safe Carrying The safe behavior of operating a forklift while carrying two (2) or fewer 
+standardized blocks as a single load. 
+Carrying Overload with 
+Forklift 
+The unsafe behavior of operating a forklift while carrying three (3) or more 
+standardized blocks as a single load. Defined as the opposite of Safe 
+Carrying. 
+Green Safety Vest 
+(Authorized) 
+The specific green-colored safety vest that indicates a personnel member is 
+authorized to perform an intervention activity. Wearing this vest is the primary 
+observable indicator distinguishing Authorized from Unauthorized 
+Intervention. 
+
+
+--- Page 4 ---
+
+KMP-OHS-POL-001  |  Occupational Health & Safety Compliance Policy Manual 
+CONTROLLED DOCUMENT — Internal Use Only  |  Kafaoglu Metal Plastik Makine San. ve Tic. A.S. Page 
+Term Definition 
+Red-Black Safety Vest 
+(General) 
+A safety vest of red and black coloring, worn by general production personnel 
+who are not cleared for direct equipment intervention. Personnel in a red-
+black vest interacting with equipment are classified as performing an 
+Unauthorized Intervention. 
+Occupational Safety Expert The qualified safety professional based at the Company's facility who is 
+responsible for verifying behavioral classifications, supervising ground-truth 
+assessment of compliance events, and overseeing occupational safety 
+matters. 
+  
+
+
+--- Page 5 ---
+
+KMP-OHS-POL-001  |  Occupational Health & Safety Compliance Policy Manual 
+CONTROLLED DOCUMENT — Internal Use Only  |  Kafaoglu Metal Plastik Makine San. ve Tic. A.S. Page 
+SECTION 3 — PEDESTRIAN WALKWAY REGULATIONS 
+3.1  Hazard Context 
+The production floor involves the simultaneous presence of operating machinery, moving forklifts, and on -
+foot personnel. Separating pedestrian movement from machinery and vehicle activity is a fundamental 
+safety measure. The Designated Safe Walkway provides a defined, physically marked route for all foot 
+traffic on the production floor. 
+3.2  Walkway Markings 
+The Designated Safe Walkway is physically marked on the production floor using green painted lines. 
+These green markings define the boundary of the permitted pedestrian zone. The floor of the facility also 
+features yellow painted lines that further delineate zones within the workspace. Personnel on foot must 
+remain within the green-marked pathway boundaries. 
+ 
+NOTE 
+The green-marked Designated Safe Walkway boundaries are visible in the facility's 
+surveillance camera views and form the primary reference boundary for the automated 
+walkway compliance detection system. 
+ 
+3.3  Behavioral Standards 
+3.3.1  Required Behavior — Safe Walkway (Compliant) 
+Safe Walkway is defined as movement along the production floor that remains within the boundaries of the 
+green-marked Designated Safe Walkway. This is the required and expected behavior for all personnel 
+moving through the production facility on foot. 
+ 
+3.3.2  Non-Compliant Behavior — Safe Walkway Violation 
+A Safe Walkway Violation is defined as movement or presence outside the boundaries of the green -marked 
+Designated Safe Walkway. This is the most frequently occurring unsafe behavior documented at this 
+facility. A Safe Walkway Violation is detected when a person's position in the video frame places them 
+beyond the green walkway boundaries and into an area designated for machinery or vehicle operation.  
+ 
+WARNING 
+The Safe Walkway Violation is the highest-frequency unsafe behavior recorded at this 
+facility. The frequency of this behavior reflects a tendency among personnel to treat minor 
+deviations from the walkway as inconsequential. Any deviation from the green -marked 
+boundaries places the individual in proximity to forklift and machinery hazards and will be 
+treated as an unsafe behavior event requiring immediate response. 
+  
+
+
+--- Page 6 ---
+
+KMP-OHS-POL-001  |  Occupational Health & Safety Compliance Policy Manual 
+CONTROLLED DOCUMENT — Internal Use Only  |  Kafaoglu Metal Plastik Makine San. ve Tic. A.S. Page 
+SECTION 4 — EQUIPMENT AND MACHINERY INTERVENTION 
+4.1  Hazard Context 
+Interaction with production equipment and machinery by personnel who are not cleared for the relevant task 
+creates risk of injury to the intervening individual and to others in the area, and may disrupt production 
+processes. Authorized personnel are visually distinguished from unauthorized personnel by the safety vest 
+they wear. This vest-based visual identification system is the primary mechanism by which intervention 
+compliance is assessed and monitored. 
+ 
+4.2  Vest Identification System 
+The facility operates a safety vest color system to indicate the authorization status of personnel interacting 
+with equipment: 
+• Green safety vest: worn by personnel who have been authorized to perform an intervention or 
+maintenance activity at a specific piece of equipment. The green vest is the observable indicator of 
+authorization. 
+• Red-black safety vest: worn by general production personnel who are not cleared for direct 
+equipment intervention. This is the standard vest for production floor personnel not performing an 
+authorized task. 
+ 
+The color of the safety vest worn by a person interacting with equipment is the primary observable criterion 
+for classifying the behavior as Authorized or Unauthorized Intervention. 
+ 
+4.3  Behavioral Standards 
+4.3.1  Required Behavior — Authorized Intervention (Compliant) 
+An Authorized Intervention is defined as an interaction with or working on production equipment performed 
+by a person who is wearing the designated green safety vest and the required safety equipment for the 
+task. The green vest indicates that the individual has been cleared to perform the activity in question. This is 
+the required and expected behavior for all equipment interaction on the production floor.  
+ 
+4.3.2  Non-Compliant Behavior — Unauthorized Intervention 
+An Unauthorized Intervention is defined as any of the following observable situations:  
+• A person interacting with or adjusting production equipment while wearing a red-black vest or any 
+vest other than the designated green authorization vest. 
+• A person interacting with or adjusting production equipment while not wearing the required safety 
+equipment for the task. 
+• A person intervening in a work situation at a production site without the observable indicators of 
+authorization (i.e., the green vest). 
+ 
+CRITICAL 
+SAFETY 
+NOTICE 
+The green safety vest is the primary and most readily observable indicator of authorization 
+status. Any person seen interacting with equipment who is not wearing the green vest 
+must be assumed to be performing an Unauthorized Intervention. This classificat ion 
+applies regardless of the person's stated intent or role, since the vest system exists 
+precisely to make authorization status unambiguous to observers and to the automated 
+monitoring system. 
+  
+
+
+--- Page 7 ---
+
+KMP-OHS-POL-001  |  Occupational Health & Safety Compliance Policy Manual 
+CONTROLLED DOCUMENT — Internal Use Only  |  Kafaoglu Metal Plastik Makine San. ve Tic. A.S. Page 
+SECTION 5 — ELECTRICAL PANEL COVER MANAGEMENT 
+5.1  Hazard Context 
+Electrical panels connected to production machinery are present throughout the facility. The covers of these 
+panels serve as a protective barrier between personnel and the electrical components of the connected 
+equipment. Leaving panel covers open or forgetting to close them after accessing the panel is an identified 
+unsafe behavior at this facility. 
+ 
+5.2  Behavioral Standards 
+5.2.1  Required Behavior — Closed Panel Cover (Compliant) 
+Closed Panel Cover is defined as the condition in which the cover of an electrical panel connected to a 
+production machine is fully closed. This is the required and expected state for all electrical panels during 
+production operations. 
+ 
+5.2.2  Non-Compliant Condition — Opened Panel Cover (Unsafe) 
+Opened Panel Cover is defined as the condition in which the cover of an electrical panel connected to a 
+production machine has been left in the open position. This includes both the deliberate leaving of a panel 
+cover open and the inadvertent forgetting to close a panel cover after accessing it. 
+ 
+An Opened Panel Cover is detected when the surveillance system observes a panel in the open -cover state 
+during production operations. The condition is an unsafe behavior event regardless of how long the panel 
+has been open or whether personnel are in the immediate vicinity at the moment of detection. 
+ 
+WARNING 
+Leaving a panel cover open — even when doing so feels like a minor or temporary 
+oversight — is classified as an unsafe behavior under this Manual. The automated 
+detection system monitors panel cover status continuously and will generate an alert 
+whenever an open-cover condition is observed. 
+  
+
+
+--- Page 8 ---
+
+KMP-OHS-POL-001  |  Occupational Health & Safety Compliance Policy Manual 
+CONTROLLED DOCUMENT — Internal Use Only  |  Kafaoglu Metal Plastik Makine San. ve Tic. A.S. Page 
+SECTION 6 — FORKLIFT LOAD MANAGEMENT 
+6.1  Hazard Context 
+Forklifts operate within the production floor to carry materials between workstations. Carrying loads that 
+exceed the defined safe limit creates risks associated with vehicle instability. The safe carrying limit for this 
+facility is defined in terms of the number of standardized block units carried in a single forklift load operation.  
+ 
+6.2  Load Capacity Definition 
+For all forklift operations within this facility involving standardized block materials, the following load 
+thresholds apply: 
+ 
+Load Configuration Number of Blocks Carried Compliance Status 
+Safe Carrying 2 blocks or fewer COMPLIANT — Required 
+behavior 
+Carrying Overload with Forklift 3 blocks or more NON-COMPLIANT — Unsafe 
+behavior 
+ 
+These thresholds apply to the standardized blocks used in this facility's production workflow. The number of 
+blocks visible on the forklift forks during travel is the observable criterion used by the automated detection 
+system to classify the load as safe or overloaded. 
+ 
+6.3  Behavioral Standards 
+6.3.1  Required Behavior — Safe Carrying (Compliant) 
+Safe Carrying is defined as operating a forklift while carrying two (2) or fewer standardized blocks in a 
+single load. This is the required and expected behavior for all forklift load operations within the facility.  
+ 
+6.3.2  Non-Compliant Behavior — Carrying Overload with Forklift 
+Carrying Overload with Forklift is defined as operating a forklift while carrying three (3) or more 
+standardized blocks in a single load. Three or more blocks on the forks during any phase of a load 
+operation — including travel, maneuvering, and loading/unloading — constitutes an unsafe behavior event. 
+ 
+CRITICAL 
+SAFETY 
+NOTICE 
+The block count threshold is unambiguous: two blocks or fewer is safe; three blocks or 
+more is an overload. Any observed forklift load of three or more standardized blocks will 
+be treated as a Carrying Overload with Forklift event and will trigger an immed iate alert. 
+  
+
+
+--- Page 9 ---
+
+KMP-OHS-POL-001  |  Occupational Health & Safety Compliance Policy Manual 
+CONTROLLED DOCUMENT — Internal Use Only  |  Kafaoglu Metal Plastik Makine San. ve Tic. A.S. Page 
+SECTION 7 — SURVEILLANCE, MONITORING, AND ALERT SYSTEM 
+7.1  Camera Infrastructure 
+The production floor is monitored by two IP cameras (brand: UNV, model: IPC2122CR3 -PF40-A) providing 
+continuous Full HD (1920×1080) video coverage of the active production zones. The cameras are 
+positioned to provide views of the areas relevant to the four behavioral domains defined in this Manual. 
+Video feeds are transmitted in real time to the facility's monitoring infrastructure.  
+ 
+Employees working in the monitored areas have been informed of the surveillance system and a consent 
+form for the protection and use of personal data has been obtained from all personnel whose images are 
+captured in the recorded footage. 
+ 
+7.2  Automated Behavior Detection 
+An automated unsafe behavior detection system continuously processes the live camera feeds. This 
+system is capable of identifying the following unsafe behavior conditions in real time:  
+• Safe Walkway Violation — a person moving or present outside the green-marked walkway 
+boundaries (Section 3). 
+• Unauthorized Intervention — a person interacting with production equipment without wearing the 
+green authorization vest, or without required safety equipment (Section 4).  
+• Opened Panel Cover — an electrical panel connected to a production machine observed in the open -
+cover state during production operations (Section 5). 
+• Carrying Overload with Forklift — a forklift observed carrying three or more standardized blocks in a 
+single load (Section 6). 
+7.3  Monitoring Interface and Reporting 
+The detection and alert system is managed through a dedicated graphical user interface (GUI) installed at 
+the facility. This interface provides the following capabilities: 
+• Live view of the camera feeds covering the production floor. 
+• Access to the automated event reports generated when unsafe behaviors are detected. Reports are 
+produced in text document format and record the event type, zone, and timestamp for each detection.  
+ 
+The event reports generated by the system constitute the primary compliance record for the facility. These 
+reports document each detected unsafe behavior event and are used by the occupational safety expert to 
+assess behavioral trends and the effectiveness of corrective measures over time. 
+  
+
+
+--- Page 10 ---
+
+KMP-OHS-POL-001  |  Occupational Health & Safety Compliance Policy Manual 
+CONTROLLED DOCUMENT — Internal Use Only  |  Kafaoglu Metal Plastik Makine San. ve Tic. A.S. Page 
+SECTION 8 — QUICK REFERENCE: BEHAVIOR CLASSIFICATION 
+SUMMARY 
+The table below provides a complete reference for all eight behavior classes defined in this Manual — four 
+unsafe and four safe — with their observable identifying characteristics and the policy section governing 
+each. 
+ 
+Class 
+ID Behavior Domain Unsafe Behavior Safe Behavior 
+(Compliant Pair) 
+Observable 
+Indicator of 
+Unsafe 
+0 Pedestrian 
+Movement 
+Safe Walkway 
+Violation 
+Safe Walkway Person 
+outside green 
+floor 
+markings 
+1 Equipment 
+Interaction 
+Unauthorized 
+Intervention 
+Authorized 
+Intervention 
+Person 
+interacting 
+with 
+equipment 
+without green 
+vest or 
+without 
+required 
+safety 
+equipment 
+2 Electrical Safety Opened Panel Cover Closed Panel Cover Panel cover 
+in open 
+position 
+during 
+production 
+operations 
+3 Forklift Load Carrying Overload 
+with Forklift 
+Safe Carrying 3 or more 
+blocks on 
+forklift forks 
+ 
+IMPORTANT 
+Each unsafe behavior has a directly corresponding safe behavior. The automated 
+detection system monitors for the four unsafe categories. The safe categories represent 
+the required default state — no alert is generated when the safe behavior is observed. 
+ 

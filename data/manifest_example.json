@@ -1,0 +1,22 @@
+{
+  "events": [
+    {
+      "clip_id": "clip_001.mp4",
+      "video": "data/clip_001.mp4",
+      "timestamp_seconds": 3.5,
+      "behavior_class": "Safe Walkway Violation",
+      "observed_behavior": "Person detected outside green-marked walkway boundaries near vehicle operating area.",
+      "zone": "Zone-1",
+      "confidence": 0.86
+    },
+    {
+      "clip_id": "clip_002.mp4",
+      "video": "data/clip_002.mp4",
+      "timestamp_seconds": 5.0,
+      "behavior_class": "Carrying Overload with Forklift",
+      "observed_behavior": "Forklift observed in active travel with three standardized blocks on the forks.",
+      "zone": "Zone-4",
+      "confidence": 0.91
+    }
+  ]
+}
