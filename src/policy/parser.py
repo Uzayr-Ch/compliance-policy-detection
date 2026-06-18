@@ -14,14 +14,6 @@ DEFAULT_POLICY_PDF = ROOT / "compliance_policy.pdf"
 DEFAULT_RULES_JSON = ROOT / "outputs" / "policy_rules.json"
 
 
-SECTION_DOMAINS = {
-    3: "Pedestrian Movement",
-    4: "Equipment Interaction",
-    5: "Electrical Safety",
-    6: "Forklift Load",
-}
-
-
 def extract_policy_text(policy_pdf: Path = DEFAULT_POLICY_PDF) -> str:
     reader = PdfReader(str(policy_pdf))
     pages = [page.extract_text() or "" for page in reader.pages]
@@ -30,25 +22,17 @@ def extract_policy_text(policy_pdf: Path = DEFAULT_POLICY_PDF) -> str:
 
 def _normalize(text: str) -> str:
     text = text.replace("\u2014", "-").replace("â€”", "-")
-    text = re.sub(r"\s+", " ", text)
-    return text.strip()
-
-
-def _section(text: str, section_number: int) -> str:
-    pattern = rf"SECTION {section_number}\s+-.*?(?=SECTION {section_number + 1}\s+-|$)"
-    match = re.search(pattern, text, flags=re.IGNORECASE | re.DOTALL)
-    return match.group(0) if match else ""
-
-
-def _heading(section: str, heading_kind: str) -> str:
-    pattern = rf"{heading_kind}.*?-\s*(.+?)(?=\s+(?:Safe|An?|The|Closed|Opened|Carrying)\s+.+?\s+is defined|\s*$)"
-    match = re.search(pattern, section, flags=re.IGNORECASE)
-    return _normalize(match.group(1)) if match else ""
+    # Normalize horizontal whitespace but keep newlines
+    text = re.sub(r"[ \t\r\f\v]+", " ", text)
+    # Strip each line
+    lines = [line.strip() for line in text.split("\n")]
+    return "\n".join(lines)
 
 
 def _first_sentence_containing(section: str, phrases: tuple[str, ...]) -> str:
-    cleaned = _normalize(section)
-    sentences = re.split(r"(?<=[.!?])\s+", cleaned)
+    # Join newlines into spaces for sentence parsing
+    single_line = re.sub(r"\s+", " ", section)
+    sentences = re.split(r"(?<=[.!?])\s+", single_line)
     for phrase in phrases:
         for sentence in sentences:
             if phrase.lower() in sentence.lower():
@@ -56,42 +40,76 @@ def _first_sentence_containing(section: str, phrases: tuple[str, ...]) -> str:
     return sentences[0] if sentences else ""
 
 
-def _hazard_signal(section: str) -> str:
-    if re.search(r"CRITICAL\s+SAFETY\s+NOTICE", section, flags=re.IGNORECASE):
-        return "CRITICAL SAFETY NOTICE"
-    if re.search(r"\bWARNING\b", section, flags=re.IGNORECASE):
-        return "WARNING"
-    return "STANDARD"
-
-
-def _default_severity(section_number: int, hazard_signal: str, section: str) -> str:
-    if hazard_signal == "CRITICAL SAFETY NOTICE":
-        return "CRITICAL"
-    if "immediate response" in section.lower() or "proximity to forklift" in section.lower():
-        return "HIGH"
-    if section_number == 5:
-        return "LOW"
-    return "MEDIUM"
-
-
 def parse_policy_rules(policy_pdf: Path = DEFAULT_POLICY_PDF) -> list[BehaviorRule]:
     text = extract_policy_text(policy_pdf)
     normalized = _normalize(text)
+    
+    sections = {}
+    pattern = r"SECTION\s+(\d+)\s+[-—–]\s*(.*?)(?=SECTION\s+\d+\s+[-—–]|$)"
+    matches = re.finditer(pattern, normalized, flags=re.IGNORECASE | re.DOTALL)
+    for m in matches:
+        sec_num = int(m.group(1))
+        sec_text = m.group(2)
+        sections[sec_num] = sec_text
+
     rules: list[BehaviorRule] = []
-
-    for section_number, domain in SECTION_DOMAINS.items():
-        section = _section(normalized, section_number)
-        if not section:
+    for sec_num, sec_text in sorted(sections.items()):
+        if "required behavior" not in sec_text.lower():
             continue
-
-        unsafe = _heading(section, r"Non-Compliant (?:Behavior|Condition)")
-        safe = _heading(section, r"Required Behavior")
-        if section_number == 5 and safe.endswith("(Compliant)"):
+            
+        unsafe_match = re.search(r"Non-Compliant\s+(?:Behavior|Condition)\s+[-—–]\s*([^\n\.]+)", sec_text, flags=re.IGNORECASE)
+        safe_match = re.search(r"Required\s+Behavior\s+[-—–]\s*([^\n\.]+)", sec_text, flags=re.IGNORECASE)
+        
+        if not unsafe_match or not safe_match:
+            continue
+            
+        unsafe = unsafe_match.group(1).replace("(Unsafe)", "").strip()
+        safe = safe_match.group(1).replace("(Compliant)", "").strip()
+        
+        unsafe = re.split(r"\s+is\s+defined", unsafe, flags=re.IGNORECASE)[0].strip()
+        safe = re.split(r"\s+is\s+defined", safe, flags=re.IGNORECASE)[0].strip()
+        
+        if sec_num == 5 and safe.endswith("(Compliant)"):
             safe = safe.replace("(Compliant)", "").strip()
-        unsafe = unsafe.replace("(Unsafe)", "").strip()
-
+            
+        domain = "Unknown"
+        title_match = re.search(rf"SECTION\s+{sec_num}\s+[-—–]\s*([^\n\d]+)", normalized, flags=re.IGNORECASE)
+        if title_match:
+            raw_title = title_match.group(1).strip()
+            if "walkway" in raw_title.lower():
+                domain = "Pedestrian Movement"
+            elif "equipment" in raw_title.lower() or "intervention" in raw_title.lower():
+                domain = "Equipment Interaction"
+            elif "electrical" in raw_title.lower() or "panel" in raw_title.lower():
+                domain = "Electrical Safety"
+            elif "forklift" in raw_title.lower() or "load" in raw_title.lower():
+                domain = "Forklift Load"
+            else:
+                domain = raw_title.title()
+                
+        ref_match = re.search(rf"({sec_num}\.\d+(?:\.\d+)?)", sec_text)
+        if ref_match:
+            policy_ref = f"Section {ref_match.group(1)}"
+        else:
+            subsection = "3.2" if sec_num in {3, 4, 6} else "2.2"
+            policy_ref = f"Section {sec_num}.{subsection}"
+            
+        signal = "STANDARD"
+        if re.search(r"CRITICAL\s+SAFETY\s+NOTICE", sec_text, flags=re.IGNORECASE):
+            signal = "CRITICAL SAFETY NOTICE"
+        elif re.search(r"\bWARNING\b", sec_text, flags=re.IGNORECASE):
+            signal = "WARNING"
+            
+        severity = "MEDIUM"
+        if signal == "CRITICAL SAFETY NOTICE":
+            severity = "CRITICAL"
+        elif "immediate response" in sec_text.lower() or "proximity to forklift" in sec_text.lower() or "highest-frequency" in sec_text.lower():
+            severity = "HIGH"
+        elif sec_num == 5:
+            severity = "LOW"
+            
         indicator = _first_sentence_containing(
-            section,
+            sec_text,
             (
                 "observable criterion",
                 "detected when",
@@ -100,15 +118,16 @@ def parse_policy_rules(policy_pdf: Path = DEFAULT_POLICY_PDF) -> list[BehaviorRu
                 "three or more",
             ),
         )
+        if not indicator:
+            indicator = f"Observable violation for {unsafe}."
+            
         excerpt = _first_sentence_containing(
-            section,
+            sec_text,
             ("is defined as", "Any person", "The block count threshold", "Leaving a panel cover open"),
         )
-        signal = _hazard_signal(section)
-        severity = _default_severity(section_number, signal, section)
-
-        subsection = "3.2" if section_number in {3, 4, 6} else "2.2"
-        policy_ref = f"Section {section_number}.{subsection}"
+        if not excerpt:
+            excerpt = sec_text[:200]
+            
         rules.append(
             BehaviorRule(
                 class_id=len(rules),
@@ -122,7 +141,7 @@ def parse_policy_rules(policy_pdf: Path = DEFAULT_POLICY_PDF) -> list[BehaviorRu
                 source_excerpt=excerpt,
             )
         )
-
+        
     return rules
 
 

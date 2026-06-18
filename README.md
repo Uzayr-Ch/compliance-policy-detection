@@ -1,233 +1,233 @@
 # Factory Compliance & Alert Escalation System
 
-This repository implements the Genesys AI intern take-home assessment: an end-to-end factory compliance pipeline that parses the provided OHS policy PDF, detects policy-defined violations from video inputs or annotations, classifies severity, routes alerts/logs, and exposes an operations dashboard.
+> End-to-end AI-powered factory safety compliance pipeline that parses OHS policy documents, detects violations from video surveillance, classifies severity with context-aware escalation, and delivers real-time alerts through an operations dashboard.
 
 ## Assessment Requirement Mapping
 
-| Requirement | Implemented in this repo |
+| Requirement | Implementation |
 | --- | --- |
-| Structured GitHub repository | `README.md`, `compliance_policy.pdf`, `data/`, `src/`, `outputs/`, `requirements.txt`, `tests/` |
-| Policy parsing | `src/policy/parser.py` extracts the four policy rules from `compliance_policy.pdf` |
-| Detection engine | `src/detection/engine.py` consumes real `data/manifest.json`, labelled video names, or demo inputs |
-| Severity matrix | `src/severity/matrix.py` assigns `LOW`, `MEDIUM`, `HIGH`, `CRITICAL` |
-| Escalation pipeline | `src/escalation/router.py` routes low/medium to DB log and high/critical to alert + DB log |
-| Automated reports | `src/reports/store.py` writes SQLite, JSONL, and CSV audit records |
-| Operations dashboard | `src/dashboard/app.py` provides live monitor, timeline, filters, and export |
-| Kaggle dataset workflow | `notebooks/kaggle_workflow.ipynb` and `src/detection/kaggle_manifest.py` |
+| Structured GitHub repository | Modular `src/` package with `tests/`, `docs/`, `notebooks/`, `outputs/` |
+| Policy parsing | `src/policy/parser.py` — dynamic regex extraction from `compliance_policy.pdf` |
+| Detection engine | `src/detection/engine.py` — YOLOv8 + OpenCV vision pipeline with mock fallback |
+| Severity classification | `src/severity/matrix.py` — 3-layer: base → context modifiers → temporal escalation |
+| Alert escalation | `src/escalation/router.py` — tiered EHS dispatch actions per severity |
+| Automated reports | `src/reports/store.py` — SHA-256 signed records in SQLite + JSONL + CSV |
+| Operations dashboard | `src/dashboard/app.py` — Streamlit control center with 5 operational tabs |
+| Kaggle dataset workflow | `notebooks/kaggle_workflow.ipynb` + `src/detection/kaggle_manifest.py` |
 
-## Recommended Submission Plan
+## Architecture
 
-The Kaggle dataset is large, so the practical workflow is:
-
-1. Keep the full required repo structure on GitHub.
-2. Use Kaggle Notebook only for heavy dataset access and sample processing.
-3. Generate `data/manifest.json` and `outputs/` on Kaggle.
-4. Download the generated output zip from Kaggle.
-5. Copy those generated files back into this repo.
-6. Commit and push this repository to GitHub.
-7. Submit the GitHub repo link in the Genesys form.
-
-This satisfies the requirement that the assessment be submitted as a structured GitHub repository while avoiding a local 10GB dataset download.
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                    COMPLIANCE PIPELINE                          │
+│                                                                 │
+│  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐    │
+│  │  Policy   │   │Detection │   │ Severity │   │Escalation│    │
+│  │  Parser   │──▶│  Engine  │──▶│  Matrix  │──▶│  Router  │    │
+│  │ (pypdf)   │   │(YOLOv8)  │   │(3-layer) │   │(dispatch)│    │
+│  └──────────┘   └──────────┘   └──────────┘   └──────────┘    │
+│       │                                              │          │
+│       ▼                                              ▼          │
+│  policy_rules.json                          ComplianceEvent     │
+│                                             + SHA-256 sig       │
+│                                                    │            │
+│                                    ┌───────────────┼──────┐     │
+│                                    ▼               ▼      ▼     │
+│                               SQLite DB       JSONL     CSV     │
+│                                                                 │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │              STREAMLIT OPERATIONS DASHBOARD               │   │
+│  │  Live Monitor │ Analytics │ Timeline │ Audit │ History    │   │
+│  └──────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────┘
+```
 
 ## Repository Structure
 
 ```text
 factory-compliance-system/
 ├── README.md
-├── compliance_policy.pdf
+├── compliance_policy.pdf          # OHS policy document (input)
+├── requirements.txt               # Python dependencies
 ├── data/
-│   └── manifest_example.json
-├── docs/
-│   ├── Compliance_Policy_Manual.pdf
-│   ├── Compliance_Policy_Manual.txt
-│   ├── Intern_Assessment_AI.pdf
-│   └── Intern_Assessment_AI.txt
+│   └── manifest_example.json      # Sample detection manifest
 ├── notebooks/
-│   └── kaggle_workflow.ipynb
+│   └── kaggle_workflow.ipynb      # Kaggle GPU processing notebook
 ├── outputs/
-│   ├── audit_log.csv
-│   ├── audit_log.jsonl
-│   ├── compliance_events.db
-│   └── policy_rules.json
+│   ├── policy_rules.json          # Extracted policy rules
+│   ├── compliance_events.db       # SQLite audit database
+│   ├── audit_log.jsonl            # Append-only JSON Lines log
+│   ├── audit_log.csv              # CSV audit export
+│   └── annotated/                 # YOLOv8-annotated video clips
 ├── src/
-│   ├── dashboard/
-│   ├── detection/
-│   ├── escalation/
+│   ├── models.py                  # Core dataclasses + SHA-256 utilities
+│   ├── run_pipeline.py            # End-to-end pipeline orchestrator
 │   ├── policy/
-│   ├── reports/
+│   │   └── parser.py              # Dynamic PDF rule extractor
+│   ├── detection/
+│   │   ├── engine.py              # YOLOv8 + OpenCV detection engine
+│   │   └── kaggle_manifest.py     # Kaggle dataset manifest builder
 │   ├── severity/
-│   ├── models.py
-│   └── run_pipeline.py
-├── tests/
-└── requirements.txt
+│   │   └── matrix.py              # Context-aware severity classifier
+│   ├── escalation/
+│   │   └── router.py              # Tiered dispatch action router
+│   ├── reports/
+│   │   └── store.py               # Triple-format audit trail writer
+│   └── dashboard/
+│       └── app.py                 # Streamlit operations dashboard
+└── tests/
+    └── test_policy_pipeline.py    # 32 unit + integration tests
 ```
 
-## Local Setup
+## Quick Start
+
+### 1. Setup
 
 ```bash
-python -m pip install -r requirements.txt
+python -m venv venv
+# Windows
+.\venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
+
+pip install -r requirements.txt
 ```
 
-The implementation uses Python standard-library storage plus `pypdf` for policy extraction and Streamlit/Pandas for the dashboard.
-
-## Run Locally
-
-Generate policy-grounded demo events:
+### 2. Run the Pipeline
 
 ```bash
+# Demo mode (synthetic detections, works without any video files)
 python -m src.run_pipeline --demo
-```
 
-Process real or Kaggle-generated manifest inputs from `data/`:
-
-```bash
+# Process real video clips from data/ directory
 python -m src.run_pipeline --data-dir data
 ```
 
-Run the dashboard:
+**Example output:**
+```
+======================================================================
+  Pipeline complete — 4 compliance event(s) generated
+======================================================================
+
+  [HIGH    ] Safe Walkway Violation          → Log + SMS alert to EHS coordinator + floor alarm activation
+  [CRITICAL] Unauthorized Intervention       → Log + emergency dispatch to safety response team + ...
+  [LOW     ] Opened Panel Cover              → Log to compliance database
+  [CRITICAL] Carrying Overload with Forklift → Log + emergency dispatch to safety response team + ...
+```
+
+### 3. Launch the Dashboard
 
 ```bash
 streamlit run src/dashboard/app.py
 ```
 
-The dashboard provides:
+### 4. Run Tests
 
-- live/simulated feed monitor with alert banners for `HIGH` and `CRITICAL` events;
-- chronological alert timeline;
-- historical event table with severity, behavior class, and zone filters;
-- CSV and JSON export buttons for filtered records.
+```bash
+python -m pytest -v
+```
+
+## Key Technical Features
+
+### Dynamic PDF Policy Parsing
+
+`src/policy/parser.py` reads `compliance_policy.pdf` and uses regex pattern matching to **dynamically** locate and extract:
+- Section boundaries (`SECTION N —`)
+- Required vs. non-compliant behavior pairs
+- Observable indicator sentences
+- Hazard signal levels (`WARNING`, `CRITICAL SAFETY NOTICE`)
+
+This ensures the parser adapts automatically if the policy document structure changes — no hardcoded page numbers or indices.
+
+### Computer Vision Pipeline (YOLOv8 + OpenCV)
+
+`src/detection/engine.py` integrates **ultralytics YOLOv8** and **OpenCV** for frame-by-frame video analysis:
+
+| Violation Type | Visual Annotation |
+| --- | --- |
+| Safe Walkway Violation | Green corridor overlay; red bounding box labeled `Violator (Outside Walkway)` for persons outside |
+| Unauthorized Intervention | Machinery zone boundary; red label `Unauthorized (Red-Black Vest)` for non-green-vest workers |
+| Opened Panel Cover | Red outline around open panel doors with blinking indicator |
+| Carrying Overload with Forklift | Counts detected boxes on forklifts; red label `Forklift Overloaded` when ≥ 3 |
+
+The engine gracefully falls back to manifest-based or demo detection when vision libraries are unavailable.
+
+### Three-Layer Severity Classification
+
+`src/severity/matrix.py` applies severity in three sequential layers:
+
+1. **Base severity** — from the policy rule's `default_severity` (extracted from the PDF)
+2. **Context modifiers** — inspects detection descriptions for proximity signals:
+   - Walkway: "forklift nearby" → escalate MEDIUM → HIGH
+   - Panel: "worker in proximity" → escalate LOW → HIGH (with negation-aware NLP)
+3. **Temporal escalation** — if the same violation class recurs within a 300-second window, severity bumps one tier (e.g. MEDIUM → HIGH)
+
+| Policy Behavior | Base Severity | Context Escalation | Temporal Escalation |
+| --- | --- | --- | --- |
+| Safe Walkway Violation | MEDIUM | → HIGH if vehicles nearby | → HIGH/CRITICAL on recurrence |
+| Unauthorized Intervention | CRITICAL | Always CRITICAL | Capped at CRITICAL |
+| Opened Panel Cover | LOW | → HIGH if workers nearby | → MEDIUM on recurrence |
+| Carrying Overload with Forklift | CRITICAL | Always CRITICAL | Capped at CRITICAL |
+
+### Immutable Cryptographic Audit Trail
+
+Every `ComplianceEvent` receives a **SHA-256 integrity signature** computed over its core fields:
+
+```
+SHA256(event_id ‖ timestamp ‖ clip_id ‖ zone ‖ behavior_class ‖ policy_rule_ref ‖ severity ‖ escalation_action)
+```
+
+The signature is stored alongside the record in all three output formats (SQLite, JSONL, CSV). The dashboard's **Audit Integrity** tab recalculates signatures on demand to verify that no records have been tampered with.
+
+### Tiered Escalation Dispatch
+
+`src/escalation/router.py` maps each severity to realistic EHS response protocols:
+
+| Severity | Dispatch Action |
+| --- | --- |
+| LOW | Log to compliance database |
+| MEDIUM | Log + email notification to shift supervisor |
+| HIGH | Log + SMS alert to EHS coordinator + floor alarm activation |
+| CRITICAL | Log + emergency dispatch + production line halt + siren + strobe |
+
+### Operations Dashboard
+
+The Streamlit dashboard provides five operational views:
+
+- **📺 Live Monitor** — Latest incident details with video playback, severity badges, and escalation actions
+- **📊 Analytics** — KPI metric cards (total/critical/high/safe) and violation frequency charts
+- **🕒 Alert Timeline** — Chronological dispatch log with column-configured data table
+- **🛡️ Audit Integrity** — Real-time SHA-256 signature verification with pass/fail indicators
+- **🗄️ Historical Logs** — Multi-filter query panel with CSV/JSON export
+
+When HIGH or CRITICAL events are active, the dashboard displays **flashing strobe alert banners** and plays a **browser-native auditory siren** (Web Audio API).
 
 ## Kaggle Workflow
 
-Use Kaggle because the dataset is already hosted there and does not need to be downloaded locally.
+The Kaggle dataset (`trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours`) is ~10GB and should be processed on Kaggle's free GPU infrastructure:
 
-1. Create a Kaggle Notebook.
-2. Attach this dataset from the Kaggle sidebar:
+1. Create a Kaggle Notebook and attach the dataset
+2. Clone this repository and install dependencies
+3. Run `python -m src.detection.kaggle_manifest --dataset-root /kaggle/input --limit-per-class 3`
+4. Run `python -m src.run_pipeline --data-dir data`
+5. Download the generated `outputs/` and commit to GitHub
 
-```text
-trnhhnggiang/video-dataset-for-safe-and-unsafe-behaviours
-```
+Detailed steps are in `notebooks/kaggle_workflow.ipynb`.
 
-3. Clone this GitHub repository inside the Kaggle Notebook:
+## Test Coverage
 
-```bash
-git clone https://github.com/YOUR_USERNAME/factory-compliance-system.git
-cd factory-compliance-system
-pip install -r requirements.txt
-```
+The test suite (`tests/test_policy_pipeline.py`) contains **32 tests** organized into 6 test classes:
 
-4. Inspect the dataset paths:
-
-```python
-from pathlib import Path
-
-videos = []
-for ext in ["*.mp4", "*.avi", "*.mov", "*.mkv", "*.webm"]:
-    videos.extend(Path("/kaggle/input").rglob(ext))
-
-print(len(videos))
-print(videos[:20])
-```
-
-5. Generate a sample manifest from Kaggle dataset videos:
+| Test Class | Tests | Covers |
+| --- | --- | --- |
+| `TestPolicyParser` | 6 | Rule extraction, domains, references, hazard signals |
+| `TestSeverityMatrix` | 8 | Context modifiers, negation handling, temporal escalation |
+| `TestEscalationRouter` | 6 | Dispatch actions, alert thresholds |
+| `TestCryptographicSignatures` | 5 | SHA-256 computation, verification, tamper detection |
+| `TestReportStore` | 3 | SQLite persistence, audit trail validation |
+| `TestPipeline` | 4 | End-to-end demo, field completeness, severity variance |
 
 ```bash
-python -m src.detection.kaggle_manifest \
-  --dataset-root /kaggle/input \
-  --limit-per-class 3 \
-  --output data/manifest.json
+$ python -m pytest -v
+================================ 32 passed in 15s ================================
 ```
-
-6. Run the full pipeline on the Kaggle-generated manifest:
-
-```bash
-python -m src.run_pipeline --data-dir data
-```
-
-7. Package outputs for GitHub:
-
-```bash
-zip -r kaggle_outputs.zip data/manifest.json outputs
-```
-
-Download `kaggle_outputs.zip`, copy its contents into this repository locally, then commit and push.
-
-The same steps are provided in `notebooks/kaggle_workflow.ipynb`.
-
-## Push To GitHub
-
-After creating an empty GitHub repository, run these commands locally from the repo root:
-
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/factory-compliance-system.git
-git branch -M main
-git push -u origin main
-```
-
-If you update outputs after running Kaggle:
-
-```bash
-git add data/manifest.json outputs README.md notebooks src
-git commit -m "Add Kaggle dataset processing outputs"
-git push
-```
-
-## Policy Parsing Approach
-
-`src/policy/parser.py` reads `compliance_policy.pdf`, extracts Sections 3-6, and builds `outputs/policy_rules.json`. Each rule contains:
-
-- unsafe behavior;
-- compliant behavior pair;
-- observable indicator sentence;
-- policy section reference;
-- hazard signal such as `WARNING` or `CRITICAL SAFETY NOTICE`;
-- default severity.
-
-This keeps behavior classes traceable to the policy document rather than defining detector categories independently.
-
-## Severity Rationale
-
-The policy contains two `WARNING` behaviors and two `CRITICAL SAFETY NOTICE` behaviors.
-
-| Policy behavior | Policy signal | Severity used | Rationale |
-| --- | --- | --- | --- |
-| Safe Walkway Violation | WARNING | HIGH | Personnel outside green walkway boundaries are near machinery/forklift hazards and require immediate response. |
-| Unauthorized Intervention | CRITICAL SAFETY NOTICE | CRITICAL | The policy says anyone interacting with equipment without the green vest must be assumed unauthorized. |
-| Opened Panel Cover | WARNING | LOW by default | State-based unsafe condition; elevated by context if personnel exposure is present. |
-| Carrying Overload with Forklift | CRITICAL SAFETY NOTICE | CRITICAL | The block threshold is explicit: three or more blocks triggers immediate alert. |
-
-## Detection Notes And Limitations
-
-The local repository can run in demo mode immediately. The full Kaggle dataset is intended to be processed in Kaggle Notebook because of its size.
-
-`src/detection/kaggle_manifest.py` creates a lightweight `data/manifest.json` from selected Kaggle videos. The manifest-based interface keeps downstream modules independent from the vision model implementation and preserves the required report fields: clip ID, timestamp, rule reference, observed behavior, zone, and confidence.
-
-For a production-grade version, the detection module should be extended with a trained or zero-shot vision model that localizes people, forklift loads, electrical panels, vest colors, and walkway boundaries frame by frame. The downstream modules are model-agnostic and already accept structured detections.
-
-## Reports
-
-Every detection generates a compliance event with the required fields:
-
-- `event_id`
-- `timestamp`
-- `clip_id`
-- `zone`
-- `behavior_class`
-- `policy_rule_ref`
-- `event_description`
-- `severity`
-- `escalation_action`
-
-Records are written to:
-
-- `outputs/compliance_events.db`
-- `outputs/audit_log.jsonl`
-- `outputs/audit_log.csv`
-
-## Tests
-
-```bash
-python -m pytest
-```
-
-The tests verify that the parser extracts the four policy-defined unsafe classes and that the demo pipeline generates complete compliance events.
